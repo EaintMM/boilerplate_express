@@ -1,6 +1,7 @@
 require('dotenv').config();
 let express = require('express');
 let app = express();
+let bodyParser = require('body-parser');
 
 // Static asset
 app.use("/public", express.static(__dirname + '/public'));
@@ -10,6 +11,9 @@ app.use(function (req, res, next){
     console.log(req.method + " " + req.path + " - " + req.ip);
     next();
 });
+
+// body parser
+app.use(bodyParser.urlencoded({extended: false}));
 
 // HTML file
 app.get("/", function (req, res){
@@ -49,6 +53,14 @@ app.get("/name", (req, res) => {
         name: `${req.query.first} ${req.query.last}`
     }); 
 });
+
+app.post("/name", (req, res) => {
+    res.json({
+        name: `${req.body.first} ${req.body.last}`
+    });
+});
+
+
 
 
 
