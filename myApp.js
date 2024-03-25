@@ -35,6 +35,21 @@ app.get("/now", function (req, res, next){
     res.send({"time" : req.time});
 });
 
+// Route parameters
+app.get("/:word/echo", function (req, res){
+    //var {word} = req.params;
+    res.json({echo: req.params.word});
+});
+
+// Qurey parameters
+app.get("/name", (req, res) => {
+   // console.log(req.query.first);
+    //res.json({name: req.query.first + " " + req.query.last});
+    res.json({
+        name: `${req.query.first} ${req.query.last}`
+    }); 
+});
+
 
 
 
